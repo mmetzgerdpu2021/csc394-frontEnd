@@ -1,0 +1,76 @@
+[
+  {
+    "reference" : "111111",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+  },
+  {
+    "reference" : "222222",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+  },
+  {
+    "reference" : "233333",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+  },
+  {
+    "reference" : "244444",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+  },
+  {
+    "reference" : "255555",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+  },
+  {
+    "reference" : "266666",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "emetteur" : "123"
+},
+
+  {
+    "reference" : "27777",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "codeEmetteur" : "123"
+  },
+  {
+    "reference" : "288888",
+    "nomClient" : "3202",
+    "prenomClient" : "PARIS CHAMPS ELYSEES",
+    "rejet" : "Disponible",
+    "motif" : "15/06/2017",
+    "acte" : "6",
+    "codeEmetteur" : "123"
+  }
+
+]

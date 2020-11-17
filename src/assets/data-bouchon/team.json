@@ -1,0 +1,17 @@
+[
+
+{
+  "selected": false,
+  "teamId": 1,
+  "teamName": "team1",
+  "numberOfMembers": 10,
+  "numberOfGoals": "3"
+},
+  {
+    "selected": false,
+    "teamId": 2,
+    "teamName": "team1",
+    "numberOfMembers": 10,
+    "numberOfGoals": "3"
+  }
+]

@@ -1,0 +1,18 @@
+{
+"titlePage" : "Commandes à reprendre",
+"labels" : {
+},
+"gridLib" : {
+    "refCde" : "COMMANDE",
+    "client" : "CLIENT",
+    "motif" : "MOTIF",
+    "rejet" : "REJET",
+    "acte" : "ACTE",
+    "emetteur" : "ÉMETTEUR"
+},
+"actionsLib" : {
+},
+"warnings" : {},
+"errors" : {},
+"infos" : {}
+}

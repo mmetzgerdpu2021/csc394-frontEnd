@@ -1,0 +1,14 @@
+---
+applications:
+  - name: ((cfy-app-name))
+    memory: 64M
+    instances: 1
+    routes:
+      - route: ((cfy-app-route-internal))
+      - route: ((cfy-app-route))
+    path: ((cfy-app-path))
+    buildpacks:
+      - ((cfy-buildpack))
+    services:
+      - log-cde-mode-degrade-front
+

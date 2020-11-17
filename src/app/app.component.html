@@ -1,0 +1,40 @@
+<p class="mb-lg-4">
+  <mat-toolbar color="primary">
+    <!--<button disabled mat-icon-button class="example-icon fa fa-users fa-2x" aria-label="Example icon-button with fa fa-users fa-2x">
+      <mat-icon>menu</mat-icon>
+    </button>-->
+    <span>PTP App</span>
+    <span class="fill-space"></span>
+    <button *ngIf="isLogged" mat-button color="Basic" class="btn btn-small" (click)="logOutRedirection()" >
+      <svg
+        class="h-4 w-4"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+        ></path>
+      </svg>
+      Logout
+    </button>
+  </mat-toolbar>
+</p>
+
+<!-- main container -->
+<main id="content" class="container-fluid mt-xxl-5">
+  <router-outlet></router-outlet>
+</main>
+
+
+<!-- footer -->
+<!--
+<footer>
+  <div class="container-fluid">
+    <span>©Orange - New VAD </span>
+  </div>
+</footer>
+-->

@@ -1,0 +1,15 @@
+.large{
+    width: 245px;
+}
+.logo p {
+    /* other styles goes here... */
+    display: inline-block;
+    vertical-align: top;
+}
+
+#logInLink {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 6px;
+    margin-right: 6px;
+}

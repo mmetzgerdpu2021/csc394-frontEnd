@@ -1,0 +1,33 @@
+<div >
+  <h1 class="text-2xl font-bold mb-lg-4 pt-lg-4">
+    Page login
+  </h1>
+</div>
+
+<div class="ml-lg-5">
+<form [formGroup]="formLogin" class="example-form" >
+  <div class="pl-10">
+    <mat-form-field class="example-full-width ">
+      <mat-label>Login</mat-label>
+      <!--<input matInput formControlName="title" [formControl]="titleFormControl" [errorStateMatcher]="matcher">-->
+      <input matInput formControlName="login">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="formLogin.get('login').hasError('required')">
+        Login is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <!--<input matInput formControlName="title" [formControl]="titleFormControl" [errorStateMatcher]="matcher">-->
+      <input matInput type="password" formControlName="password">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="formLogin.get('password').hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="login()">Login</button>
+</form>
+</div>

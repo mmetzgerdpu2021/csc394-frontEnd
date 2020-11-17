@@ -1,0 +1,20 @@
+<table  *ngIf="dataTableConfig" class="table align-items-center table-dark" [class.table-dark]="dataTableConfig.darkMode">
+        <thead>
+            <tr >
+                <th scope="col" class="sort" *ngFor="let column of dataTableConfig.columns">
+                    {{column.label}}
+                </th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            <tr  *ngFor="let dataRow of dataSource;">
+                <td  *ngFor="let column of dataTableConfig.columns" >
+                    <span class="pseudolink"  *ngIf="column.isLink; else notLink" (click)="clickedColumn(dataRow)" [innerHtml]="dataRow.cell(column.code)"></span>
+                    <ng-template #notLink>
+                      <span [innerHtml]="dataRow.cell(column.code)"></span>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+</table>
+

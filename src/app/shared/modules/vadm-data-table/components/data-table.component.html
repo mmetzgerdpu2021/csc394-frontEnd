@@ -1,0 +1,17 @@
+<table  *ngIf="dataTableConfig" class="table align-items-center table-dark" [class.table-dark]="dataTableConfig.darkMode">
+        <thead>
+            <tr >
+                <th scope="col" class="sort" *ngFor="let column of dataTableConfig.columns">
+                    {{column.label}}
+                </th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            <tr *ngFor="let dataRow of dataSource;">
+                <td *ngFor="let column of dataTableConfig.columns" [innerHtml]="dataRow.cell(column.code)">
+
+                </td>
+            </tr>
+        </tbody>
+</table>
+

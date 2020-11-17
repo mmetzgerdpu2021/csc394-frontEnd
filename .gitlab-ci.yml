@@ -1,0 +1,117 @@
+include:
+  - project: "new-vadm-team/ci-templates"
+    ref: "master"
+    file: "cloudfoundry-template.yml"
+
+# web-shop pipeline
+stages:
+  - build
+  - deploy
+
+# global variables
+variables:
+  CFY_APP_HOST: "nevada-cmd-mode-degrade-app"
+  APP_NAME: "cmd-mode-degrade-app"
+  CFY_BUILDPACK: "staticfile_buildpack_v1_5_2"
+
+# ==================================================
+# Job templates
+# ==================================================
+
+# template for NodeJS job
+.job_template: &node
+  image: registry.forge.orange-labs.fr/ufla7286/node-angular-chrome:7.3.8-node10
+  # cache configuration
+  cache:
+    untracked: true
+    key: "$CI_PROJECT_ID"
+    paths:
+      - node_modules/
+  before_script:
+    - npm install
+  tags:
+    - forge
+    - docker
+    - shared
+
+
+# ==================================================
+# Build
+# ==================================================
+
+build-angular:
+  <<: *node
+  stage: build
+  script:
+    - ng build --prod --no-progress  --base-href /mode-degrade-app/
+  artifacts:
+    name: dist
+    paths:
+      - dist/
+    expire_in: 1 week
+  only:
+    - develop
+
+# ==================================================
+# Deploy
+# ==================================================
+
+## VM - deploy dist/tar.gz to artifactory
+deploy-artifactory-vm:
+  image: dockerproxy-iva.si.francetelecom.fr/curlimages/curl:7.66.0
+  stage: deploy
+  script:
+    - pwd
+    - tar -zcvf vad-reprise-commande.tar.gz ./dist/vad-reprise-commande/
+    - curl -v -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD -T ./vad-reprise-commande.tar.gz "https://artifactory-iva.si.francetelecom.fr/artifactory/gen-virt-orange-product-devops-unstable/vad-reprise-commande.tar.gz"
+  only:
+    - develop
+  tags:
+    - rsc
+    - shared
+    - docker
+
+
+# Cloudfoundry
+.deploy-cloudfoundry-staging:
+  extends: .cloudfoundry-template
+  stage: deploy
+  before_script:
+    - "echo 'pushstate: enabled' > dist/vad-reprise-commande/Staticfile" # enable pushstate routing mode for Angular router
+  script:
+    # Get the cloudfoundry-staging env config from gitlab configuration project
+    # TO:DO try using $CI_JOB_TOKEN instead of personal access token (only work for clone I think) OR try using deploy token ?
+#    - "wget -P ./dist/vad-reprise-commande/assets/env --header 'PRIVATE-TOKEN: ${GITLAB_TOKEN}' https://gitlab.forge.orange-labs.fr/api/v4/projects/38247/repository/files/cloudfoundry-staging%2fenv.cloudfoundry-staging.json/raw?ref=master"
+
+    # Replace env by cloudfoundry-staging develop
+    - sed -i "s|development|cfy-$CFY_ENV|g" ./dist/vad-reprise-commande/assets/env/env.json
+
+    - cf login --skip-ssl-validation -a $CFY_URL -u $CFY_USER -p $CFY_PASSWORD -o $CFY_ORG -s $CFY_SPACE
+    - |
+      echo "
+      cfy-app-name: $CFY_APP_NAME
+      cfy-app-path: $CFY_APP_PATH
+      cfy-app-route: $CFY_APP_ROUTE
+      cfy-app-route-internal: $CFY_APP_ROUTE_INTERNAL
+      cfy-buildpack: $CFY_BUILDPACK
+      " > vars.yml  && cat vars.yml
+    - cf push -f ./manifest.yml --vars-file ./vars.yml --no-start
+  after_script:
+    - cf bind-service $CFY_APP_NAME log-cde-mode-degrade-front-$CFY_ENV
+    - cf service $APP_NAME-service-$CFY_ENV 2> /dev/null || cf cups $APP_NAME-service-$CFY_ENV -p $CFY_SERVICE_URI
+    - cf push -f ./manifest.yml --vars-file ./vars.yml
+
+
+deploy-cloudfoundry-staging-develop:
+  extends: .deploy-cloudfoundry-staging
+  variables:
+    CFY_ENV: develop
+    CFY_ORG: $CFY_ORG_STAGING
+    CFY_APP_PATH: ./dist/vad-reprise-commande
+    CFY_APP_NAME: $APP_NAME-$CFY_ENV
+    CFY_APP_ROUTE: $CFY_APP_HOST-$CFY_ENV.$CFY_DOMAIN
+    CFY_APP_ROUTE_INTERNAL: $CFY_APP_HOST-$CFY_ENV.$CFY_DOMAIN_INTERNAL
+    CFY_SERVICE_URI: '{"uri":"http://nevada-cmd-mode-degrade-app-develop.apps.internal:8080"}'
+  only:
+    - develop
+
