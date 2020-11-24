@@ -22,7 +22,8 @@ export class AppComponent implements OnInit{
     this.isLogged = JSON.parse(sessionStorage.getItem('isLogged'));
      if (JSON.parse(sessionStorage.getItem('isLogged'))) {
 
-       this.route.navigateByUrl('/management/teacher')
+        this.route.navigateByUrl('/management/teacher')
+       //this.route.navigateByUrl('/management/student')
      } else {
        this.route.navigateByUrl('auth/login');
      }

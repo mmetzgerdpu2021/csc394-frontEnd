@@ -1,0 +1,24 @@
+
+.textAvg {
+  padding-left: 10px;
+  font-size: 50px;
+  font-style: oblique;
+  color: blue;
+  font-weight: bolder;
+}
+
+.example-header-image {
+  background-image: url('/assets/img/user.png');
+  background-size: cover;
+}
+
+.divtext {
+  border: ridge 2px;
+  padding: 5px;
+  width: 20em;
+  min-height: 5em;
+  overflow: auto;
+}
+
+
+

@@ -61,6 +61,7 @@ export class LoginPageComponent implements OnInit {
      sessionStorage.setItem('accessToken', JSON.stringify(result));
       sessionStorage.setItem('isLogged', JSON.stringify(true));
      this.route.navigateByUrl('/management/teacher');
+     //this.route.navigateByUrl('/management/student');
     });
   /*  this.userLogged = {
       userId:2,

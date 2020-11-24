@@ -26,6 +26,10 @@ export class TeamService {
         return this.httpClient.get<Array<Team>>(isBouchon ? this.BOUCHON_URL : this.basePath + this.PATH_TEAM_API + this.PATH_TEAM_BY_TEACHER_API + '/' + teacherId);
     }
 
+    getAllTeam(isBouchon?: boolean): Observable<Array<Team>> {
+        return this.httpClient.get<Array<Team>>(isBouchon ? this.BOUCHON_URL : this.basePath + this.PATH_TEAM_API + '/all');
+    }
+
   getTeamById(teamId: number, isBouchon?: boolean): Observable<Team> {
     return this.httpClient.get<Team>(isBouchon ? this.BOUCHON_URL_TEAM_BY_ID : this.basePath + this.PATH_TEAM_API + '/' + teamId);
   }
